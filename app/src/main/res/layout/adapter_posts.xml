@@ -20,7 +20,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="@dimen/size8dp"
                 android:layout_weight="0.9"
                 android:orientation="vertical">
 
@@ -34,7 +34,7 @@
                     android:id="@+id/postBody"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="@dimen/size8dp"
                     android:textColor="@color/black" />
             </LinearLayout>
 

@@ -8,14 +8,18 @@
     tools:context=".HomeActivity"
     tools:viewBindingIgnore="false">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_logout" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/homeTabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/purple_500"
         app:tabIndicatorColor="@color/white"
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabLayoutTextStyle"
-        android:background="@color/purple_500"
         app:tabTextColor="@color/offWhite" />
 
     <androidx.viewpager.widget.ViewPager

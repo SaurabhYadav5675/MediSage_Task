@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appBar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/purple_700"
+    android:contentInsetStart="0dp"
+    android:contentInsetLeft="0dp"
+    android:contentInsetEnd="0dp"
+    android:contentInsetRight="0dp"
+    app:contentInsetEnd="0dp"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetStart="0dp">
+
+    <LinearLayout
+        android:id="@+id/toolbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/toolbar_TitleText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center"
+            android:layout_weight="0.9"
+            android:gravity="left|center"
+            android:paddingLeft="@dimen/size10dp"
+            android:text="Title Text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt14sp" />
+
+
+        <ImageView
+            android:id="@+id/toolbarLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="@dimen/size10dp"
+            android:layout_weight="0.1"
+            android:gravity="right"
+            android:padding="2dp"
+            android:src="@drawable/ic_logout" />
+
+
+    </LinearLayout>
+</androidx.appcompat.widget.Toolbar>
