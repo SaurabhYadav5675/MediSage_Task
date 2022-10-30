@@ -33,7 +33,7 @@ class FieldValidation {
         }
 
         fun isValidName(name: String, nameContainer: TextInputLayout): Boolean {
-            var isValid: Boolean = false
+            var isValid = false
             if (TextUtils.isEmpty(name)) {
                 nameContainer.error = "Please enter name"
             } else if (name.trim().isEmpty()) {
@@ -46,7 +46,7 @@ class FieldValidation {
         }
 
         fun isValidContact(contact: String, contactContainer: TextInputLayout): Boolean {
-            var isValid: Boolean = false
+            var isValid = false
             if (TextUtils.isEmpty(contact)) {
                 contactContainer.error = "Please enter contact"
             } else if (contact.length < 10) {
@@ -59,7 +59,7 @@ class FieldValidation {
         }
 
         fun isValidEmail(email: String, emailContainer: TextInputLayout): Boolean {
-            var isValid: Boolean = false
+            var isValid = false
             if (TextUtils.isEmpty(email)) {
                 emailContainer.error = "Please enter email"
             } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -72,7 +72,7 @@ class FieldValidation {
         }
 
         fun isValidPassword(pass: String, passwordContainer: TextInputLayout): Boolean {
-            var isValid: Boolean = false
+            var isValid = false
             if (pass.length < 8 && pass.length < 15) {
                 passwordContainer.error = "Password must be between 8 to 15 digits"
             } else if (!PASSWORD_PATTERN.matcher(pass).matches()) {

@@ -1,11 +1,12 @@
 package com.medisage.meditask.repository
 
 import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.medisage.meditask.api.ApiService
 import com.medisage.meditask.appDatabase.UserDatabase
-import com.medisage.meditask.model.ApiPostModel
 import com.medisage.meditask.model.Posts
 import com.medisage.meditask.utilities.FieldValidation
 
@@ -14,12 +15,6 @@ class PostRepository(
     private val userDatabase: UserDatabase,
     private val requireContext: Context
 ) {
-
-    private val postLiveData = MutableLiveData<ApiPostModel>()
-    val posts: LiveData<ApiPostModel>
-        get() = postLiveData
-
-    //data from database
     private val postLocalData = MutableLiveData<List<Posts>>()
     val postsLocal: LiveData<List<Posts>>
         get() = postLocalData
@@ -31,44 +26,46 @@ class PostRepository(
         get() = postFavLocalData
 
     suspend fun getPosts() {
-
         if (FieldValidation.isInternetAvailable(requireContext)) {
             val result = apiService.getPosts()
-            if (result?.body() != null) {
+            Log.e("Data133", "calling api")
+            if (result.body() != null) {
                 val apiItems = result.body()
                 val dbItems = apiItems?.map { apiItems ->
                     Posts(
-                        id = apiItems.id.toInt(),
-                        userId = apiItems.userId.toInt(),
+                        id = apiItems.id,
+                        userId = apiItems.userId,
                         title = apiItems.title,
                         body = apiItems.body,
                         favourite = "0",
                     )
                 }
                 if (dbItems != null) {
+                    with(postLocalData) { postValue(dbItems) }
                     userDatabase.postsDao().insertAllPost(dbItems)
                 }
-                postLiveData.postValue(result.body())
             }
-        }
-        val resultLocal = userDatabase.postsDao().getAllPost()
-        if (resultLocal != null) {
-            postLocalData.postValue(resultLocal)
+        } else {
+            Toast.makeText(requireContext, "getting data from database ", Toast.LENGTH_SHORT).show()
+            val resultLocal = userDatabase.postsDao().getAllPost()
+            if (resultLocal.isNotEmpty()) {
+                postLocalData.postValue(resultLocal)
+            }
         }
     }
 
     suspend fun updatePost(postId: Int, favValue: String) {
         userDatabase.postsDao().updateSinglePost(postId, favValue)
         val updatedData = userDatabase.postsDao().getAllPost()
-        if (updatedData != null) {
+        if (updatedData.isNotEmpty()) {
             postLocalData.postValue(updatedData)
         }
         getFavPosts()
     }
 
-    suspend fun getFavPosts() {
+    fun getFavPosts() {
         val updatedData = userDatabase.postsDao().getAllFavPost()
-        if (updatedData != null) {
+        if (updatedData.isNotEmpty()) {
             postFavLocalData.postValue(updatedData)
         }
     }

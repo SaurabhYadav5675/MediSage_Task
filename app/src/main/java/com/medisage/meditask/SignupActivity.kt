@@ -34,10 +34,10 @@ class SignupActivity : AppCompatActivity() {
                 FieldValidation.isValidContact(userContact.toString(), binding.contactContainer)
 
             val isValidEmail =
-                FieldValidation.isValidEmail(userMail.toString(), binding.nameContainer)
+                FieldValidation.isValidEmail(userMail.toString(), binding.mailContainer)
 
             val isValidPass =
-                FieldValidation.isValidPassword(userPass.toString(), binding.nameContainer)
+                FieldValidation.isValidPassword(userPass.toString(), binding.passContainer)
 
             if ((isValidName && isValidContact) && (isValidEmail && isValidPass)) {
                 GlobalScope.launch {
